@@ -1,0 +1,19 @@
+Title: Study of YOLO26 Dataset Configuration Files
+
+YOLO26 datasets are organized using a dataset configuration file and annotation label files. The dataset configuration file is usually written in YAML format. In this task, the file data.yaml was inspected. It contains important meta-information required by YOLO to understand the dataset.
+
+The data.yaml file contains fields such as path, train, val, and names. The path field gives the root location of the dataset. The train field gives the location of the training images, while the val field gives the location of the validation images. The names field maps class numbers to class names. For example, class number 5 represents bus.
+
+The dataset also contains label files inside labels/train and labels/val. These label files store object annotations. For every image, there is usually a corresponding text file with the same name. For example, bus.jpg has a label file named bus.txt. The label file contains the class number and object coordinates.
+
+The object detection label format is class_id x_center y_center width height. In the file bus.txt, the label 5 0.500 0.500 0.700 0.700 means that the object belongs to class 5, which is bus. The value 0.500 represents the x-center of the bounding box, 0.500 represents the y-center, 0.700 represents the width, and 0.700 represents the height. These values are normalized between 0 and 1, so they are independent of image size.
+
+In segmentation datasets, the label file contains class_id followed by polygon coordinates such as x1 y1 x2 y2 x3 y3 and so on. This gives more detailed object boundaries than a detection bounding box.
+
+These meta files are important because YOLO uses them during training and validation. If the path, train, or val fields are incorrect, YOLO cannot find the dataset. If class numbers do not match the names section, the model may learn the wrong object classes. Therefore, correct YAML configuration and label files are essential for accurate YOLO26 training.
+
+References:
+Ultralytics Object Detection Dataset Format: https://docs.ultralytics.com/datasets/detect/
+Ultralytics Segmentation Dataset Format: https://docs.ultralytics.com/datasets/segment/
+Ultralytics YOLO26 Documentation: https://docs.ultralytics.com/models/yolo26/
+Ultralytics Training Documentation: https://docs.ultralytics.com/modes/train/
